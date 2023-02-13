@@ -1,6 +1,9 @@
 import { BsFillPlusCircleFill } from 'react-icons/bs'
+import { useAppSelector } from '../store'
 
 const FoodCard = () => {
+    const basket = useAppSelector(state => state.basket.basket)
+    console.log(basket)
     const addBasket = () => {
     }
     return (

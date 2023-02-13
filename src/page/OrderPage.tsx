@@ -7,6 +7,7 @@ import { Link } from 'react-router-dom'
 import { useAppDispatch, useAppSelector } from '../store'
 import { addUser, addUserAddreses } from '../features/userSlice'
 import { User, UserDeliveryAddress } from '../types/user'
+import BasketCard from '../components/BasketCard'
 
 
 
@@ -14,7 +15,6 @@ const OrderPage = () => {
     const dispatch = useAppDispatch()
     const userInfo = useAppSelector(state => state.user)
     const userAddressesInfo = useAppSelector(state => state.user.addresses)
-    //const orderUser = useAppSelector(state => state.order.orderCustomer)
 
     const handlerSubmit = (e: any) => {
         e.preventDefault()
@@ -94,7 +94,7 @@ const OrderPage = () => {
                                 <div className='flex gap-5'>
                                     <TextField name='email' onChange={e => addUsersValue({ email: e.target.value })} className='w-full' size="small" color='warning' id="outlined-basic" label="Email" variant="outlined" />
                                 </div>
-                                <div className='flex gap-5 '>
+                                <div className='flex gap-5  '>
                                     <TextField onChange={e => addUsersValue({ firstName: e.target.value })} className='w-full' size="small" color='warning' id="outlined-basic" label="First name" variant="outlined" />
                                     <TextField onChange={e => addUsersValue({ lastName: e.target.value })} className='w-full' size="small" color='warning' id="outlined-basic" label="Last name" variant="outlined" />
                                 </div>
@@ -102,13 +102,13 @@ const OrderPage = () => {
                                     <TextField onChange={e => addUsersValue({ phone: e.target.value })} className='w-full' size="medium" color='warning' id="outlined-basic" label="Mobile number" variant="outlined" />
                                 </div>
                             </div>
-                            <button onClick={handlerSubmit}>hasdhahsdh</button>
+                            <button className='bg-orange-400 w-1/3 m-auto p-4 rounded-lg text-white text-center' onClick={handlerSubmit}>Place Order</button>
                         </div>
                     </div>
-
                 </form>
-
-                <div className='sticky top-0 w-1/3 h-96 bg-blue-100'></div>
+                <div className='sticky top-0 w-1/3 h-96 bg-blue-100 overflow-auto'>
+                    <BasketCard />
+                </div>
             </div >
         </div >
     )

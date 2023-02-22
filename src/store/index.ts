@@ -2,7 +2,10 @@ import { configureStore } from '@reduxjs/toolkit'
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
 
 import basketSlice from '../features/basketSlice';
+import cousinesSlice from '../features/cousinesSlice';
 import orderSlice from '../features/orderSlice';
+import productsSlice from '../features/productsSlice';
+import restaurantsSlice from '../features/restaurantsSlice';
 import userSlice from '../features/userSlice';
 
 const store = configureStore({
@@ -10,6 +13,9 @@ const store = configureStore({
         basket: basketSlice,
         order: orderSlice,
         user: userSlice,
+        products: productsSlice,
+        cousines: cousinesSlice,
+        restaurants: restaurantsSlice
     }
 })
 

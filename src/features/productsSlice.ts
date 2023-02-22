@@ -1,36 +1,20 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { Products } from "../types/products";
+import { WritableDraft } from "immer/dist/internal";
+import { Couisines, Products, Restaurant } from "../types/products";
 
 const initialState: Products = {
-    id: "",
-    name: "",
-    address: {
-        city: "",
-        country: "",
-    },
-    cuisines: [],
-    description: "",
-    food_photos: [],
-    logo_photos: [],
-    phone_number: 0,
-    type: "",
-    menu: {
-        burgers: [],
-        desserts: [],
-        drinks: [],
-        friedChickens: [],
-        souces: [],
-    }
+    restaurants: [],
+    cousines: []
 }
 const productsSlice = createSlice({
     name: "products",
     initialState,
     reducers: {
-        addProducts: (state, action: PayloadAction<Products>) => {
-            state.id = action.payload.id;
-            state.name = action.payload.name;
-            state.address = action.payload.address;
-            state.cuisines = action.payload.cuisines;
+        addRestaurantData: (state, action: PayloadAction<Restaurant>) => {
+            action.payload.map((value: WritableDraft<Restaurant>) => state.restaurants?.push(value))
+        },
+        addCousineData: (state, action: PayloadAction<Couisines>) => {
+            action.payload.map((value: WritableDraft<Couisines>) => state.cousines?.push(value))
         }
     }
 
@@ -38,3 +22,4 @@ const productsSlice = createSlice({
 
 
 export default productsSlice.reducer;
+export const { addRestaurantData, addCousineData } = productsSlice.actions;

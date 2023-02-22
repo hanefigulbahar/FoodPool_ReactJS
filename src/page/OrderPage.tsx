@@ -106,7 +106,7 @@ const OrderPage = () => {
                         </div>
                     </div>
                 </form>
-                <div className='sticky top-0 w-1/3 h-96 bg-blue-100 overflow-auto'>
+                <div className='sticky top-0 w-1/3 h-96 shadow-lg rounded-lg overflow-auto'>
                     <BasketCard />
                 </div>
             </div >

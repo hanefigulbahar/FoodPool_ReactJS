@@ -6,7 +6,7 @@ module.exports = {
   theme: {
     extend: {
       backgroundImage: {
-        'banner1': "url('https://www.diabetesfoodhub.org/system/user_files/Images/1837-diabetic-pecan-crusted-chicken-breast_JulAug20DF_clean-simple_061720.jpg')",
+        'banner1': "url('./assets/banner-img.png')",
       },
     screens: {
       'mobileS':'320px',

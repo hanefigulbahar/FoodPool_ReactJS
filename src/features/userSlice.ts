@@ -3,7 +3,6 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { User, UserDeliveryAddress } from "../types/user";
 
 const initialState: User = {
-
     firstName: "",
     lastName: "",
     email: "",

@@ -1,24 +1,10 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { Basket } from "../types/basket";
+import { Food } from "../types/products";
 
-interface IBasketSlice {
-
-    basketStatus: boolean
-    basket: {
-        id: number
-        name: string
-        price: string
-        count: number
-    }
-}
-const initialState: IBasketSlice = {
+const initialState: Basket = {
     basketStatus: false,
-    basket: {
-        id: 0,
-        name: "",
-        price: "",
-        count: 0
-    }
-
+    baskets: []
 }
 const basketSlice = createSlice({
     name: "basket",
@@ -26,11 +12,19 @@ const basketSlice = createSlice({
     reducers: {
         basketOpen: (state, action: PayloadAction<boolean>) => {
             state.basketStatus = action.payload;
+        },
+        addBasketData: (state, action: PayloadAction<Food>) => {
+            const basketChecked = state.baskets.find(item => item.id === action.payload.id)
+            if (!basketChecked) {
+                state.baskets.push(action.payload)
+            } else {
+                basketChecked?.amount !== undefined && basketChecked.amount++
+            }
         }
+
     }
-
-})
-
+}
+)
 
 export default basketSlice.reducer;
-export const { basketOpen } = basketSlice.actions;
+export const { basketOpen, addBasketData } = basketSlice.actions;

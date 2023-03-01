@@ -1,17 +1,36 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-import RestaurantBanner from '../components/RestaurantBanner'
+import { useEffect } from "react";
 
+import FoodCard from "../components/FoodCard";
+import RestaurantBanner from "../components/RestaurantBanner";
+import { useAppDispatch, useAppSelector } from "../store";
+import { RestaurantServices } from "../services";
+import { selectedRestaurantsByIDData } from "../features/restaurantsSlice";
 
+const RestaurantPage = () => {
+  const dispatch = useAppDispatch();
+  const filtredData = useAppSelector((state) => state.restaurants.restaurant);
+  const selectedRestaurant = localStorage.getItem("restaurant");
 
-const Restaurant = () => {
+  useEffect(() => {
+    if (selectedRestaurant) {
+      RestaurantServices.getRestaurantsByID(selectedRestaurant)
+        .then((res) => dispatch(selectedRestaurantsByIDData(res)))
+        .catch((err) => err);
+    }
+  }, [dispatch, selectedRestaurant]);
 
-    return (
-        <div className="relative flex flex-col gap-5 m-auto mobileS:m-3 tablet:m-10" >
-            <RestaurantBanner />
-            <div className="grid gap-10 mobileS:grid-cols-1 tablet:grid-cols-2 laptop:grid-cols-3 desktop:grid-cols-4 ">
-            </div>
-        </div >
-    )
-}
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
-export default Restaurant
+  return (
+    <div className="relative flex flex-col gap-5 m-auto mobileS:m-3 tablet:m-10">
+      <RestaurantBanner />
+      <div className="grid gap-10 my-14 mobileS:grid-cols-1 tablet:grid-cols-2 laptop:grid-cols-3 desktop:grid-cols-4 ">
+        <FoodCard data={filtredData} />
+      </div>
+    </div>
+  );
+};
+
+export default RestaurantPage;

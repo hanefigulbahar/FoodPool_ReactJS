@@ -1,14 +1,14 @@
-import { Outlet } from "react-router-dom"
+import { Outlet } from "react-router-dom";
 
-import Header from "../components/Header"
+import Header from "../components/Header";
 
 const Layout = () => {
-    return (
-        <div>
-            <Header />
-            <Outlet />
-        </div>
-    )
-}
+  return (
+    <div className="relative">
+      <Header />
+      <Outlet />
+    </div>
+  );
+};
 
-export default Layout
+export default Layout;

@@ -11,7 +11,7 @@ const productsSlice = createSlice({
   name: "products",
   initialState,
   reducers: {
-    addRestaurantData: (state, action: PayloadAction<Restaurant>) => {
+    addRestaurantData: (state, action: PayloadAction<Restaurant[]>) => {
       action.payload.map((value: WritableDraft<Restaurant>) =>
         state.restaurants?.push(value)
       );

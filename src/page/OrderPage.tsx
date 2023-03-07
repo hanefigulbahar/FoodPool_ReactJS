@@ -1,5 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { TextField } from "@mui/material";
 import {
@@ -13,17 +11,24 @@ import BasketCard from "../components/BasketCard";
 import { useAppDispatch, useAppSelector } from "../store";
 import { RestaurantServices } from "../services";
 import { addUser, addUserAddreses } from "../features/userSlice";
-import { addOrderCustomer } from "../features/orderSlice";
+import { addOrderCustomer, addOrderDetails } from "../features/orderSlice";
 import { User, UserDeliveryAddress } from "../types/user";
 import { OrderDetail } from "../types/order";
+import { setOpen } from "../features/modalSlice";
+import Modals from "../components/Modals";
+import { useEffect } from "react";
+import { isOrderValidation } from "../features/validationSlice";
 
 const OrderPage = () => {
   const dispatch = useAppDispatch();
   const userInfo = useAppSelector((state) => state.user);
   const userAddressesInfo = useAppSelector((state) => state.user.addresses);
   const basket = useAppSelector((state) => state.basket.baskets);
-  const basketStatus = useAppSelector((state) => state.basket.basketStatus);
   const orderUser = useAppSelector((state) => state.order);
+  //const modalStatus = useAppSelector((state) => state.modals.isOpen);
+  const validationOrder = useAppSelector(
+    (state) => state.validation.orderValidation
+  );
 
   const deliveryFee: number = 84;
   const total =
@@ -49,22 +54,38 @@ const OrderPage = () => {
     dispatch(
       addUserAddreses({ buildingName, doorNumber, flat, floor, noteOrRider })
     );
+    dispatch(addOrderCustomer(userInfo));
   }
+  const validation = ({ orderCustomer, orderDetails }: OrderDetail) => {
+    if (
+      (orderCustomer.firstName &&
+        orderCustomer.email &&
+        orderCustomer.lastName &&
+        orderCustomer.phone &&
+        orderCustomer.addresses?.buildingName &&
+        orderCustomer.addresses.doorNumber &&
+        orderCustomer.addresses.flat &&
+        orderCustomer.addresses.floor) !== ""
+    ) {
+      RestaurantServices.postData(orderUser)
+        .then(() => dispatch(setOpen(true)))
+        .catch((err) => {
+          console.log(err);
+        });
+    } else {
+      dispatch(isOrderValidation(orderCustomer));
+    }
+  };
 
   const handlerOrderDataSave = (orderUser: OrderDetail) => {
-    RestaurantServices.postData(orderUser)
-      .then(() => localStorage.removeItem("basket"))
-      .catch((err) => {
-        console.log(err);
-      });
+    validation(orderUser);
   };
 
   useEffect(() => {
-    console.log("içi");
-  }, [basketStatus]);
-  /*  */
+    dispatch(addOrderDetails(basket));
+  }, [basket, dispatch]);
 
-  console.log(orderUser, basket);
+  console.log(orderUser);
   return (
     <div>
       <header className="flex justify-between items-center h-16 border shadow-sm mobileS:text-sm mobileS:px-2 laptop:text-base laptop:px-20 ">
@@ -86,6 +107,11 @@ const OrderPage = () => {
           </div>
         </div>
       </header>
+      <div>
+        <>
+          <Modals />
+        </>
+      </div>
       <div className="relative flex gap-5 p-20">
         <div className="flex flex-col mx-auto gap-10 w-2/3 ">
           <div className="flex flex-col gap-10 shadow-lg rounded-lg p-10">
@@ -99,6 +125,7 @@ const OrderPage = () => {
               <div>Delivery Address:</div>
               <div className="flex gap-5">
                 <TextField
+                  error={validationOrder.addresses.buildingName}
                   onChange={(e) =>
                     addAddresesValue({ buildingName: e.target.value })
                   }
@@ -107,9 +134,11 @@ const OrderPage = () => {
                   color="warning"
                   id="outlined-basic"
                   label="Building name"
+                  required
                   variant="outlined"
                 />
                 <TextField
+                  error={validationOrder.addresses.doorNumber}
                   onChange={(e) =>
                     addAddresesValue({ doorNumber: e.target.value })
                   }
@@ -118,26 +147,31 @@ const OrderPage = () => {
                   color="warning"
                   id="outlined-basic"
                   label="Flat"
+                  required
                   variant="outlined"
                 />
               </div>
               <div className="flex gap-5 ">
                 <TextField
+                  error={validationOrder.addresses.flat}
                   onChange={(e) => addAddresesValue({ flat: e.target.value })}
                   className="w-full"
                   size="small"
                   color="warning"
                   id="outlined-basic"
                   label="Floor"
+                  required
                   variant="outlined"
                 />
                 <TextField
+                  error={validationOrder.addresses.floor}
                   onChange={(e) => addAddresesValue({ floor: e.target.value })}
                   className="w-full"
                   size="small"
                   color="warning"
                   id="outlined-basic"
                   label="Door number"
+                  required
                   variant="outlined"
                 />
               </div>
@@ -167,6 +201,7 @@ const OrderPage = () => {
               <div className="flex flex-col gap-5 ">
                 <div className="flex gap-5">
                   <TextField
+                    error={validationOrder.email}
                     name="email"
                     onChange={(e) => addUsersValue({ email: e.target.value })}
                     className="w-full"
@@ -174,11 +209,13 @@ const OrderPage = () => {
                     color="warning"
                     id="outlined-basic"
                     label="Email"
+                    required
                     variant="outlined"
                   />
                 </div>
                 <div className="flex gap-5  ">
                   <TextField
+                    error={validationOrder.firstName}
                     onChange={(e) =>
                       addUsersValue({ firstName: e.target.value })
                     }
@@ -187,9 +224,11 @@ const OrderPage = () => {
                     color="warning"
                     id="outlined-basic"
                     label="First name"
+                    required
                     variant="outlined"
                   />
                   <TextField
+                    error={validationOrder.lastName}
                     onChange={(e) =>
                       addUsersValue({ lastName: e.target.value })
                     }
@@ -198,29 +237,31 @@ const OrderPage = () => {
                     color="warning"
                     id="outlined-basic"
                     label="Last name"
+                    required
                     variant="outlined"
                   />
                 </div>
                 <div>
                   <TextField
+                    error={validationOrder.phone}
                     onChange={(e) => addUsersValue({ phone: e.target.value })}
                     className="w-full"
                     size="medium"
                     color="warning"
                     id="outlined-basic"
                     label="Mobile number"
+                    required
                     variant="outlined"
                   />
                 </div>
               </div>
               {basket.length > 0 ? (
-                <a
-                  href="/"
+                <button
                   className="bg-orange-400 w-1/3 m-auto p-4 rounded-lg text-white text-center"
                   onClick={() => handlerOrderDataSave(orderUser)}
                 >
                   Place Order
-                </a>
+                </button>
               ) : (
                 <button
                   className="bg-orange-200 w-1/3 m-auto p-4 rounded-lg text-white text-center"
@@ -231,8 +272,6 @@ const OrderPage = () => {
               )}
             </div>
           </div>
-
-          <div>hello</div>
         </div>
         {basket.length > 0 && (
           <div className="sticky top-0 h-screen w-1/3 mx-auto  shadow-lg rounded-lg ">

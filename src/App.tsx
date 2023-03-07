@@ -5,6 +5,7 @@ import HomePage from "./page/HomePage";
 import RestaurantPage from "./page/RestaurantPage";
 import OrderPage from "./page/OrderPage";
 import RestaurantByCity from "./page/RestaurantByCity";
+import LoginPage from "./page/LoginPage";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
         <Route path="/:city" element={<RestaurantByCity />} />
       </Route>
       <Route path="/order" element={<OrderPage />} />
+      <Route path="/login" element={<LoginPage />} />
     </Routes>
   );
 }

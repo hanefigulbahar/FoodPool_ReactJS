@@ -24,7 +24,10 @@ const restaurantsSlice = createSlice({
       state.restaurant = action.payload;
     },
     searchRestaurantByCity: (state, action: PayloadAction<string>) => {
-      state.city = action.payload;
+      const city = action.payload.trim();
+      const checkedCityValue =
+        city.charAt(0).toUpperCase() + city.slice(1).toLowerCase();
+      state.city = checkedCityValue;
     },
   },
 });

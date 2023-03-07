@@ -33,7 +33,7 @@ const Header = () => {
           <div className="items-center border-r px-1">
             <div className="rounded-md bg-yellow-400/30 p-2">
               <Link
-                to="#"
+                to="login"
                 className="flex gap-1 justify-center items-center text-center my-auto mobileS:text-xs mobileS:mx-2 laptop:text-base laptop:mx-6"
               >
                 <BiUserCircle className=" text-xl text-yellow-500" />

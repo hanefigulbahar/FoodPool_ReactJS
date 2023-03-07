@@ -15,7 +15,7 @@ const Cuisine = () => {
         <button
           onClick={(e) => clickCousineData(data)}
           key={data.id}
-          className="border border-gray-200 bg-gray-100/30 hover:border-green-400 hover:bg-green-100/30 rounded-lg  "
+          className="border border-gray-200 bg-gray-100/30 snap-always snap-center hover:border-green-400 hover:bg-green-100/30 rounded-lg  "
         >
           <div className="h-32 w-28">
             <div className="flex justify-center items-center h-2/3">

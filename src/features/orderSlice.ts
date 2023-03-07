@@ -29,8 +29,11 @@ const orderSlice = createSlice({
     addOrderCustomer: (state, action: PayloadAction<User>) => {
       state.orderCustomer = action.payload;
     },
+    addOrderDetails: (state, action: PayloadAction<Food[]>) => {
+      state.orderDetails = action.payload;
+    },
   },
 });
 
 export default orderSlice.reducer;
-export const { addOrderCustomer } = orderSlice.actions;
+export const { addOrderCustomer, addOrderDetails } = orderSlice.actions;

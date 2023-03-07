@@ -1,7 +1,5 @@
-import {
-  MdOutlineDeliveryDining,
-  MdOutlinePersonPinCircle,
-} from "react-icons/md";
+import { MdOutlinePersonPinCircle } from "react-icons/md";
+import { SlBasket, SlBasketLoaded } from "react-icons/sl";
 import { Link } from "react-router-dom";
 import { useAppSelector } from "../store";
 
@@ -15,13 +13,17 @@ const Basket = () => {
     basket.reduce((acc, item) => acc + item.amount * item.fee, 0) + deliveryFee;
   return (
     <>
-      {basket.length > 0 && (
+      {basket.length > 0 ? (
         <div className="absolute top-16 h-screen  rounded-xl right-0 w-96 bg-white ">
           <div className="h-2/3 overflow-auto">
-            <div className="flex justify-center mt-10">
-              <MdOutlineDeliveryDining className=" text-green-400 text-3xl" />
+            <div className="flex flex-col gap-6 ">
+              <div className="flex justify-center mt-10">
+                <SlBasketLoaded className=" text-green-400 text-4xl" />
+              </div>
+              <div className="text-center text-gray-400 font-semibold">
+                Your orders
+              </div>
             </div>
-            <div className="text-center">Your order from</div>
             <BasketCard />
           </div>
           <div className="mx-auto w-80 h-1/4 border-dashed border-t-2 border-gray-400/5 ">
@@ -49,6 +51,17 @@ const Basket = () => {
             >
               Checkout
             </Link>
+          </div>
+        </div>
+      ) : (
+        <div className="absolute top-16 h-screen  rounded-xl right-0 w-96 bg-white ">
+          <div className="flex flex-col gap-6 justify-center h-2/3 overflow-auto">
+            <div className="flex justify-center mt-10">
+              <SlBasket className=" text-green-400 text-4xl" />
+            </div>
+            <div className="text-center text-gray-400 font-semibold">
+              Your basket is empty!
+            </div>
           </div>
         </div>
       )}

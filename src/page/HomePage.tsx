@@ -13,7 +13,7 @@ import Loading from "../components/Loading";
 const HomePage = () => {
   const dispatch = useAppDispatch();
   const loading = useAppSelector((state) => state.loadings.loading);
-  //const basket = useAppSelector((state) => state.basket);
+
   const allData: Restaurant[] = useAppSelector(
     (state) => state.products.restaurants
   );
@@ -31,7 +31,7 @@ const HomePage = () => {
         .catch((err) => console.log(err));
     }
   }, [allData.length, dispatch]);
-  console.log(loading);
+
   return (
     <div className="relative m-auto mobileS:m-3 tablet:m-10">
       <Banner />

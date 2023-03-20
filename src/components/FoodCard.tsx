@@ -29,7 +29,9 @@ const FoodCard = ({ data, addBasket }: FoodCardProps) => {
           <div className="flex justify-center pt-10 max-h-72 w-60 rounded-lg shadow-md text-black /60 border border-white hover:border-orange-200">
             <div className="flex flex-col justify-center text-center gap-2 w-72 mt-12 p-8">
               <div className="font-semibold">{data.name}</div>
-              <div className="border-y border-gray-200  p-2">3 kişilik</div>
+              <div className="border-y border-gray-200 font-thin text-sm p-2">
+                1 portion
+              </div>
               <div className="flex justify-between text-2xl text-orange-300">
                 <div className="font-semibold">${data.fee}</div>
                 <button

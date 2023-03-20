@@ -26,7 +26,7 @@ const restaurantsSlice = createSlice({
     searchRestaurantByCity: (state, action: PayloadAction<string>) => {
       const city = action.payload.trim();
       const checkedCityValue =
-        city.charAt(0).toUpperCase() + city.slice(1).toLowerCase();
+        city.charAt(0).toLocaleUpperCase() + city.slice(1).toLocaleLowerCase();
       state.city = checkedCityValue;
     },
   },

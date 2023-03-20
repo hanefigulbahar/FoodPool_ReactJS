@@ -8,6 +8,7 @@ import modalSlice from "../features/modalSlice";
 import orderSlice from "../features/orderSlice";
 import productsSlice from "../features/productsSlice";
 import restaurantsSlice from "../features/restaurantsSlice";
+import sessionSlice from "../features/sessionSlice";
 import userSlice from "../features/userSlice";
 import validationSlice from "../features/validationSlice";
 
@@ -22,6 +23,7 @@ const store = configureStore({
     modals: modalSlice,
     loadings: loadingSlice,
     validation: validationSlice,
+    session: sessionSlice,
   },
 });
 

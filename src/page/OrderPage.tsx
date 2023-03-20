@@ -18,6 +18,7 @@ import { setOpen } from "../features/modalSlice";
 import Modals from "../components/Modals";
 import { useEffect } from "react";
 import { isOrderValidation } from "../features/validationSlice";
+import logo from "../assets/Logo.png";
 
 const OrderPage = () => {
   const dispatch = useAppDispatch();
@@ -25,7 +26,7 @@ const OrderPage = () => {
   const userAddressesInfo = useAppSelector((state) => state.user.addresses);
   const basket = useAppSelector((state) => state.basket.baskets);
   const orderUser = useAppSelector((state) => state.order);
-  //const modalStatus = useAppSelector((state) => state.modals.isOpen);
+
   const validationOrder = useAppSelector(
     (state) => state.validation.orderValidation
   );
@@ -69,8 +70,8 @@ const OrderPage = () => {
     ) {
       RestaurantServices.postData(orderUser)
         .then(() => dispatch(setOpen(true)))
-        .catch((err) => {
-          console.log(err);
+        .catch(() => {
+          dispatch(setOpen(false));
         });
     } else {
       dispatch(isOrderValidation(orderCustomer));
@@ -89,7 +90,14 @@ const OrderPage = () => {
   return (
     <div>
       <header className="flex justify-between items-center h-16 border shadow-sm mobileS:text-sm mobileS:px-2 laptop:text-base laptop:px-20 ">
-        <Link to={"/"}>Logo</Link>
+        <Link className="flex justify-center items-center gap-2" to="/">
+          <img
+            className="w-12 h-12 object-cover rounded-full"
+            src={logo}
+            alt=""
+          />
+          <div>FoodPool</div>
+        </Link>
         <div className="flex justify-center items-center h-full">
           <div className="items-center border-r px-1">
             <div className="rounded-md bg-yellow-400/30 p-2">

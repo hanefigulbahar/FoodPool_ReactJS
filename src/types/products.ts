@@ -31,6 +31,7 @@ export interface Couisines {
 interface Address {
   city: string;
   country: string;
+  img?: string;
 }
 
 export interface Menu {

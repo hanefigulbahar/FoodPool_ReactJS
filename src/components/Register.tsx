@@ -54,7 +54,7 @@ function Register({
   };
   return (
     <>
-      <div className="flex flex-col justify-center items-center bg-white w-1/3 h-96 p-10 border  shadow-md rounded-lg ">
+      <div className="flex flex-col justify-center items-center bg-white  laptop:w-1/3 mobileS:w-screenh-96 p-10 border shadow-md rounded-lg">
         {count === 1 && (
           <div className="flex flex-col gap-4 w-full p-3">
             <div>
@@ -64,8 +64,10 @@ function Register({
                 src="https://img.icons8.com/clouds/100/null/important-mail.png"
               />
             </div>
-            <div className=" font-semibold text-lg">What's your email?</div>
-            <div className="text-gray-400">
+            <div className=" font-semibold laptop:text-lg mobileS:text-base">
+              What's your email?
+            </div>
+            <div className="text-gray-400 mobileS:text-xs">
               We'll check if you have an account
             </div>
             <div>
@@ -73,7 +75,7 @@ function Register({
                 required={true}
                 value={user.email}
                 onChange={(e) => userInfoHandler({ email: e.target.value })}
-                className="w-full"
+                className="w-full "
                 size="small"
                 color="warning"
                 id="outlined-basic"
@@ -83,8 +85,7 @@ function Register({
             </div>
             <button
               className="flex justify-center items-center text-white border bg-orange-400 w-1/2 rounded-lg p-2 m-auto"
-              onClick={() => loginCardHandler(2)}
-            >
+              onClick={() => loginCardHandler(2)}>
               Counitine
             </button>
           </div>
@@ -93,10 +94,13 @@ function Register({
           <div className="flex flex-col gap-4 w-full p-3">
             <div>
               <img
+                className="text-lg"
                 alt="user"
                 src="https://img.icons8.com/plasticine/100/null/test-account.png"
               />
-              <div className="text-gray-400">We need a some information!</div>
+              <div className="text-gray-400 mobileS:text-xs">
+                We need a some information!
+              </div>
             </div>
             <TextField
               required={true}
@@ -134,14 +138,12 @@ function Register({
             <div className="flex gap-3">
               <button
                 className="flex justify-center items-center text-white border bg-orange-400 w-1/2 rounded-lg p-2 m-auto"
-                onClick={() => loginCardHandler(1)}
-              >
+                onClick={() => loginCardHandler(1)}>
                 Backwards
               </button>
               <button
                 className="flex justify-center items-center text-white border bg-orange-400 w-1/2 rounded-lg p-2 m-auto"
-                onClick={() => loginCardHandler(3)}
-              >
+                onClick={() => loginCardHandler(3)}>
                 Counitine
               </button>
             </div>
@@ -170,13 +172,11 @@ function Register({
               />
               <InputAdornment
                 className=" absolute right-3 top-1/2"
-                position="end"
-              >
+                position="end">
                 <IconButton
                   aria-label="toggle password visibility"
                   onClick={handleClickShowPassword}
-                  edge="end"
-                >
+                  edge="end">
                   {showPassword ? <MdVisibilityOff /> : <MdVisibility />}
                 </IconButton>
               </InputAdornment>
@@ -197,13 +197,11 @@ function Register({
               />
               <InputAdornment
                 className=" absolute right-3 top-1/2"
-                position="end"
-              >
+                position="end">
                 <IconButton
                   aria-label="toggle password visibility"
                   onClick={handleClickShowPassword}
-                  edge="end"
-                >
+                  edge="end">
                   {showPassword ? <MdVisibilityOff /> : <MdVisibility />}
                 </IconButton>
               </InputAdornment>
@@ -211,14 +209,12 @@ function Register({
             <div className="flex gap-3">
               <button
                 className="flex justify-center items-center text-white border bg-orange-400 w-1/2 rounded-lg p-2 m-auto"
-                onClick={(e) => loginCardHandler(2)}
-              >
+                onClick={(e) => loginCardHandler(2)}>
                 Backwards
               </button>
               <button
                 onClick={submitHandle}
-                className="flex justify-center items-center text-white border bg-orange-400 w-1/2 rounded-lg p-2 m-auto"
-              >
+                className="flex justify-center items-center text-white border bg-orange-400 w-1/2 rounded-lg p-2 m-auto">
                 Finish
               </button>
             </div>

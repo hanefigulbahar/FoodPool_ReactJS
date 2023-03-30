@@ -103,8 +103,7 @@ const OrderPage = () => {
             <div className="rounded-md bg-yellow-400/30 p-2">
               <Link
                 to="#"
-                className="flex gap-1 justify-center items-center text-center my-auto mobileS:text-xs mobileS:mx-2 laptop:text-base laptop:mx-6"
-              >
+                className="flex gap-1 justify-center items-center text-center my-auto mobileS:text-xs mobileS:mx-2 laptop:text-base laptop:mx-6">
                 <BiUserCircle className=" text-xl text-yellow-500" />
                 <div className="text-base text-gray-600">Login</div>
               </Link>
@@ -120,18 +119,20 @@ const OrderPage = () => {
           <Modals />
         </>
       </div>
-      <div className="relative flex gap-5 p-20">
-        <div className="flex flex-col mx-auto gap-10 w-2/3 ">
-          <div className="flex flex-col gap-10 shadow-lg rounded-lg p-10">
-            <div className="flex gap-5 justify-start items-center text-center rounded-lg text-5xl">
+      <div className="relative flex laptop:flex-row mobileS:flex-col-reverse justify-center gap-5 laptop:p-20 mobileS:py-10 ">
+        <div className="flex flex-col mx-auto gap-10 laptop:w-2/3 ">
+          <div className="flex flex-col gap-10 shadow-lg rounded-lg laptop:p-10 mobileS:p-5">
+            <div className="flex gap-5 justify-start items-center text-center rounded-lg laptop:text-5xl mobileS:text-4xl">
               <div className="text-orange-300 bg-yellow-400/30 rounded-lg p-2">
                 <MdOutlineDeliveryDining />
               </div>
-              <div className="text-2xl">Delivery Information</div>
+              <div className="laptop:text-2xl mobileS:text-lg">
+                Delivery Information
+              </div>
             </div>
             <div className="flex flex-col gap-5 ">
               <div>Delivery Address:</div>
-              <div className="flex gap-5">
+              <div className="flex laptop:flex-row mobileS:flex-col gap-5">
                 <TextField
                   error={validationOrder.addresses.buildingName}
                   onChange={(e) =>
@@ -159,7 +160,7 @@ const OrderPage = () => {
                   variant="outlined"
                 />
               </div>
-              <div className="flex gap-5 ">
+              <div className="flex laptop:flex-row mobileS:flex-col gap-5 ">
                 <TextField
                   error={validationOrder.addresses.flat}
                   onChange={(e) => addAddresesValue({ flat: e.target.value })}
@@ -207,7 +208,7 @@ const OrderPage = () => {
                 <div className="text-2xl">Personal Information</div>
               </div>
               <div className="flex flex-col gap-5 ">
-                <div className="flex gap-5">
+                <div className="flex laptop:flex-row mobileS:flex-col gap-5">
                   <TextField
                     error={validationOrder.email}
                     name="email"
@@ -221,7 +222,7 @@ const OrderPage = () => {
                     variant="outlined"
                   />
                 </div>
-                <div className="flex gap-5  ">
+                <div className="flex laptop:flex-row mobileS:flex-col gap-5  ">
                   <TextField
                     error={validationOrder.firstName}
                     onChange={(e) =>
@@ -265,16 +266,14 @@ const OrderPage = () => {
               </div>
               {basket.length > 0 ? (
                 <button
-                  className="bg-orange-400 w-1/3 m-auto p-4 rounded-lg text-white text-center"
-                  onClick={() => handlerOrderDataSave(orderUser)}
-                >
+                  className="bg-orange-400 laptop:w-1/3 mobileS:w-full m-auto p-4 rounded-lg text-white text-center"
+                  onClick={() => handlerOrderDataSave(orderUser)}>
                   Place Order
                 </button>
               ) : (
                 <button
-                  className="bg-orange-200 w-1/3 m-auto p-4 rounded-lg text-white text-center"
-                  disabled
-                >
+                  className="bg-orange-200 laptop:w-1/3 mobileS:w-full m-auto p-4 rounded-lg text-white text-center"
+                  disabled>
                   Place Order
                 </button>
               )}
@@ -282,11 +281,11 @@ const OrderPage = () => {
           </div>
         </div>
         {basket.length > 0 && (
-          <div className="sticky top-0 h-screen w-1/3 mx-auto  shadow-lg rounded-lg ">
-            <div className="h-3/4  overflow-auto">
+          <div className="laptop:sticky top-0 h-screen laptop:w-1/3 mx-auto shadow-lg rounded-lg ">
+            <div className="h-3/4 overflow-auto">
               <BasketCard />
             </div>
-            <div className=" flex flex-col justify-start mx-auto w-80  border-dashed border-t-2 border-gray-400/5 ">
+            <div className=" flex flex-col justify-start mx-auto laptop:w-80 mobileS:p-5 laptop:p-1 border-dashed border-t-2 border-gray-400/5 ">
               <div className="mx-auto my-2 h-14 w-80 ">
                 <div className="flex justify-between items-center text-center text-xs font-semibold">
                   <div className="flex gap-3 justify-center items-center text-center">

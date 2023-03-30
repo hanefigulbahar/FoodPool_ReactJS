@@ -35,17 +35,15 @@ const LoginPage = () => {
         )}
       </div>
       <div className="flex flex-col justify-center items-center w-screen h-screen ">
-        <div className=" flex gap-1 justify-end items-center w-1/3 px-2 ">
+        <div className=" flex gap-1 justify-end items-center laptop:w-1/3 laptop:px-2 mobileS:px-4 mobileS:w-80   ">
           <button
             onClick={() => selectedAccount(false)}
-            className=" text-white border focus:bg-green-500 bg-green-400 w-1/4 rounded-lg rounded-b-none p-2 "
-          >
+            className=" text-white border focus:bg-green-500 bg-green-400 w-1/4 mobileS:text-sm laptop:text-base rounded-lg rounded-b-none p-2 ">
             Login
           </button>
           <button
             onClick={() => selectedAccount(true)}
-            className=" text-white border focus:bg-green-500 bg-green-400 w-1/4 rounded-lg rounded-b-none p-2 "
-          >
+            className=" text-white border focus:bg-green-500 bg-green-400 w-1/4 mobileS:text-sm laptop:text-base rounded-lg rounded-b-none p-2 ">
             Register
           </button>
         </div>

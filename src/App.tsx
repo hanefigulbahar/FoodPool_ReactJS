@@ -4,8 +4,9 @@ import Layout from "./page/Layout";
 import HomePage from "./page/HomePage";
 import RestaurantPage from "./page/RestaurantPage";
 import OrderPage from "./page/OrderPage";
-import RestaurantByCity from "./page/RestaurantByCity";
+//import RestaurantByCity from "./page/RestaurantByCity";
 import LoginPage from "./page/LoginPage";
+//<Route path="/:city" element={<RestaurantByCity />} />;
 
 function App() {
   return (
@@ -16,7 +17,6 @@ function App() {
           path="/:restaurantName/:restaurantID"
           element={<RestaurantPage />}
         />
-        <Route path="/:city" element={<RestaurantByCity />} />
       </Route>
       <Route path="/order" element={<OrderPage />} />
       <Route path="/login" element={<LoginPage />} />

@@ -8,7 +8,7 @@ import { BiUserCircle } from "react-icons/bi";
 import { IoPersonCircleOutline } from "react-icons/io5";
 
 import BasketCard from "../components/BasketCard";
-import { useAppDispatch, useAppSelector } from "../store";
+import { useAppDispatch, useAppSelector } from "../store/hook";
 import { RestaurantServices } from "../services";
 import { addUser, addUserAddreses } from "../features/userSlice";
 import { addOrderCustomer, addOrderDetails } from "../features/orderSlice";

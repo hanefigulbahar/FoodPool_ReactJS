@@ -1,7 +1,7 @@
 import { BiMap } from "react-icons/bi";
 import { useNavigate } from "react-router-dom";
 import { searchRestaurantByCity } from "../features/restaurantsSlice";
-import { useAppDispatch, useAppSelector } from "../store";
+import { useAppDispatch, useAppSelector } from "../store/hook";
 import { Restaurant } from "../types/products";
 
 const Banner = () => {
@@ -12,7 +12,7 @@ const Banner = () => {
     (state) => state.products?.restaurants
   );
   const searchHandle = () => {
-    if (allData.find((data) => data.address.city === cityValues)) {
+    if (allData.find((data) => data.address?.city === cityValues)) {
       navigate("/" + cityValues);
       dispatch(searchRestaurantByCity(""));
     }
@@ -28,16 +28,18 @@ const Banner = () => {
         <BiMap className="ml-1 text-green-500/50 text-lg" />
         <div className="flex justify-center items-center w-full  ">
           <input
+            data-testid="search-city"
             onChange={(e) => dispatch(searchRestaurantByCity(e.target.value))}
             placeholder="City"
             type="text"
             className="w-full outline-none px-1 p-2"
+            value={cityValues}
           />
           {cityValues?.length !== 0 ? (
             <button
+              data-testid="banner-search"
               onClick={searchHandle}
-              className="bg-green-300 py-2 px-8 rounded-r-md"
-            >
+              className="bg-green-300 py-2 px-8 rounded-r-md">
               Find
             </button>
           ) : (

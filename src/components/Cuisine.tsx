@@ -1,5 +1,5 @@
 import { selectedCousine } from "../features/cousinesSlice";
-import { useAppDispatch, useAppSelector } from "../store";
+import { useAppDispatch, useAppSelector } from "../store/hook";
 import { Couisines } from "../types/products";
 
 const Cuisine = () => {

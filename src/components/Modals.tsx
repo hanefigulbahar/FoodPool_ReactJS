@@ -2,7 +2,7 @@ import { Box } from "@mui/system";
 import React from "react";
 import { Modal } from "@mui/material";
 import { AiOutlineCheck, AiOutlineClose } from "react-icons/ai";
-import { useAppDispatch, useAppSelector } from "../store";
+import { useAppDispatch, useAppSelector } from "../store/hook";
 import { setOpen } from "../features/modalSlice";
 
 export default function Modals() {

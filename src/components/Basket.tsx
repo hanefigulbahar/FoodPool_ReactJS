@@ -1,7 +1,7 @@
 import { MdOutlinePersonPinCircle } from "react-icons/md";
 import { SlBasket, SlBasketLoaded } from "react-icons/sl";
 import { Link } from "react-router-dom";
-import { useAppSelector } from "../store";
+import { useAppSelector } from "../store/hook";
 
 import BasketCard from "./BasketCard";
 

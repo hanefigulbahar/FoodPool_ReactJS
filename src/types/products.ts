@@ -5,11 +5,10 @@ export interface Products {
 
 export interface Restaurant {
   filter?: any;
-  map?: any;
   id: string;
-  name: string;
-  phone_number: number;
-  address: Address;
+  name?: string;
+  phone_number?: number;
+  address?: Address;
   category: string;
   description?: string;
   cousines?: string[];

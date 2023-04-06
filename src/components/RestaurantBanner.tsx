@@ -1,4 +1,4 @@
-import { useAppSelector } from "../store";
+import { useAppSelector } from "../store/hook";
 
 const RestaurantBanner = () => {
   const selectedRestaurantsByIDData = useAppSelector(

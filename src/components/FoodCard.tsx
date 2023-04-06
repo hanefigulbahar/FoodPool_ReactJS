@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { BsFillPlusCircleFill } from "react-icons/bs";
-import { useAppSelector } from "../store";
+import { useAppSelector } from "../store/hook";
 import { Food, Restaurant } from "../types/products";
 
 interface FoodCardProps {

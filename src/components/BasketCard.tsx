@@ -1,4 +1,4 @@
-import { useAppDispatch, useAppSelector } from "../store";
+import { useAppDispatch, useAppSelector } from "../store/hook";
 import { AiOutlineMinusCircle } from "react-icons/ai";
 import { Food } from "../types/products";
 import { deleteBasketData } from "../features/basketSlice";

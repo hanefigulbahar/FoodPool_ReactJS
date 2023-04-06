@@ -1,9 +1,7 @@
-import { IconButton, InputAdornment, TextField } from "@mui/material";
-import React from "react";
 import { MdVisibility, MdVisibilityOff } from "react-icons/md";
 import { addSessionUser, setCreateSuccess } from "../features/sessionSlice";
 import { RestaurantServices } from "../services";
-import { useAppDispatch, useAppSelector } from "../store";
+import { useAppDispatch, useAppSelector } from "../store/hook";
 import { UserSession } from "../types/user";
 
 type RegisterProps = {
@@ -54,7 +52,9 @@ function Register({
   };
   return (
     <>
-      <div className="flex flex-col justify-center items-center bg-white  laptop:w-1/3 mobileS:w-screenh-96 p-10 border shadow-md rounded-lg">
+      <div
+        data-testid={"login-modal"}
+        className="flex flex-col justify-center items-center bg-white h-96  laptop:w-1/3 mobileS:w-screenh-96 p-10 border shadow-md rounded-lg">
         {count === 1 && (
           <div className="flex flex-col gap-4 w-full p-3">
             <div>
@@ -71,16 +71,12 @@ function Register({
               We'll check if you have an account
             </div>
             <div>
-              <TextField
-                required={true}
-                value={user.email}
+              <input
+                className="w-full border-2 border-gray-400 outline-none px-3 rounded-md p-2 focus:border-orange-400 "
+                type="text"
+                placeholder="E-mail"
                 onChange={(e) => userInfoHandler({ email: e.target.value })}
-                className="w-full "
-                size="small"
-                color="warning"
-                id="outlined-basic"
-                label="E-mail"
-                variant="outlined"
+                value={user.email}
               />
             </div>
             <button
@@ -102,38 +98,26 @@ function Register({
                 We need a some information!
               </div>
             </div>
-            <TextField
-              required={true}
-              value={user.firstName}
+            <input
+              className="w-full border-2 border-gray-400 outline-none px-3 rounded-md p-2 focus:border-orange-400 "
+              type="text"
+              placeholder="FirstName"
               onChange={(e) => userInfoHandler({ firstName: e.target.value })}
-              className="w-full"
-              size="small"
-              color="warning"
-              id="outlined-basic"
-              label="Name"
-              variant="outlined"
+              value={user.firstName}
             />
-            <TextField
-              required={true}
-              value={user.lastName}
+            <input
+              className="w-full border-2 border-gray-400 outline-none px-3 rounded-md p-2 focus:border-orange-400 "
+              type="text"
+              placeholder="LastName"
               onChange={(e) => userInfoHandler({ lastName: e.target.value })}
-              className="w-full"
-              size="small"
-              color="warning"
-              id="outlined-basic"
-              label="Surname"
-              variant="outlined"
+              value={user.lastName}
             />
-            <TextField
-              required={true}
-              value={user.phone}
+            <input
+              className="w-full border-2 border-gray-400 outline-none px-3 rounded-md p-2 focus:border-orange-400 "
+              type="text"
+              placeholder="Phone"
               onChange={(e) => userInfoHandler({ phone: e.target.value })}
-              className="w-full"
-              size="small"
-              color="warning"
-              id="outlined-basic"
-              label="Phone"
-              variant="outlined"
+              value={user.phone}
             />
             <div className="flex gap-3">
               <button
@@ -159,52 +143,42 @@ function Register({
               <div className="text-gray-400">Create password!</div>
             </div>
             <div className="relative">
-              <TextField
-                required={true}
-                onChange={(e) => userInfoHandler({ password: e.target.value })}
-                className="w-full"
-                size="small"
-                color="warning"
-                id="outlined-basic"
-                label="Password"
-                variant="outlined"
+              <input
+                className="w-full border-2 border-gray-400 outline-none px-3 rounded-md p-2 focus:border-orange-400 "
                 type={showPassword ? "text" : "password"}
+                placeholder="Password"
+                onChange={(e) => userInfoHandler({ password: e.target.value })}
+                value={user.password}
               />
-              <InputAdornment
-                className=" absolute right-3 top-1/2"
-                position="end">
-                <IconButton
-                  aria-label="toggle password visibility"
-                  onClick={handleClickShowPassword}
-                  edge="end">
-                  {showPassword ? <MdVisibilityOff /> : <MdVisibility />}
-                </IconButton>
-              </InputAdornment>
+              <button
+                onClick={handleClickShowPassword}
+                className="absolute top-3 right-2">
+                {showPassword ? (
+                  <MdVisibilityOff className="text-xl text-gray-400" />
+                ) : (
+                  <MdVisibility className="text-xl text-gray-400" />
+                )}
+              </button>
             </div>
             <div className="relative">
-              <TextField
-                required={true}
+              <input
+                className="w-full border-2 border-gray-400 outline-none px-3 rounded-md p-2 focus:border-orange-400 "
+                type={showPassword ? "text" : "password"}
+                placeholder="Re-Password"
                 onChange={(e) =>
                   userInfoHandler({ rePassword: e.target.value })
                 }
-                className="w-full appearance-none"
-                size="small"
-                color="warning"
-                id="outlined-basic"
-                label="Re-Password"
-                variant="outlined"
-                type={showPassword ? "text" : "password"}
+                value={user.rePassword}
               />
-              <InputAdornment
-                className=" absolute right-3 top-1/2"
-                position="end">
-                <IconButton
-                  aria-label="toggle password visibility"
-                  onClick={handleClickShowPassword}
-                  edge="end">
-                  {showPassword ? <MdVisibilityOff /> : <MdVisibility />}
-                </IconButton>
-              </InputAdornment>
+              <button
+                onClick={handleClickShowPassword}
+                className="absolute top-3 right-2">
+                {showPassword ? (
+                  <MdVisibilityOff className="text-xl text-gray-400" />
+                ) : (
+                  <MdVisibility className="text-xl text-gray-400" />
+                )}
+              </button>
             </div>
             <div className="flex gap-3">
               <button

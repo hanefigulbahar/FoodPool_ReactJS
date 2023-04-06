@@ -1,8 +1,7 @@
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 
-import RestaurantCard from "../components/RestaurantCard";
-import { useAppDispatch, useAppSelector } from "../store";
+import { useAppDispatch, useAppSelector } from "../store/hook";
 import { RestaurantServices } from "../services";
 import { Restaurant } from "../types/products";
 import { addRestaurantData } from "../features/productsSlice";
@@ -20,9 +19,10 @@ const RestaurantByCity = () => {
   const searchCity = location.pathname.split("/")[1];
 
   const bannerImg = allData.find(
-    (data) => data.address.city === location.pathname.split("/")[1]
+    (data) => data.address?.city === location.pathname.split("/")[1]
   );
-  useEffect(() => {
+
+  const fetchData = () => {
     if (allData.length === 0) {
       dispatch(isLoading(true));
       RestaurantServices.getAllData()
@@ -30,13 +30,14 @@ const RestaurantByCity = () => {
         .then(() => dispatch(isLoading(false)))
         .catch((err) => console.log(err));
     }
-  }, [allData.length, dispatch]);
-
+  };
   useEffect(() => {
+    fetchData();
     window.scrollTo(0, 0);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   const filteredData = allData.filter(
-    (data) => data.address.city === location.pathname.split("/")[1]
+    (data) => data.address?.city === location.pathname.split("/")[1]
   );
   console.log(allData);
 
@@ -50,17 +51,12 @@ const RestaurantByCity = () => {
       <div className="relative w-screen h-96">
         <img
           className="object-cover opacity-50 w-full h-full"
-          src={bannerImg?.address.img}
-          alt={bannerImg?.address.city}
+          src={bannerImg?.address?.img}
+          alt={bannerImg?.address?.city}
         />
         <div className="absolute left-1/2 top-1/2 -translate-x-1/2 text-5xl font-light opacity-40">
-          {bannerImg?.address.city.toLocaleUpperCase()}
+          {bannerImg?.address?.city.toLocaleUpperCase()}
         </div>
-        {allData.filter((data) => data.address.city === searchCity) && (
-          <div>
-            <RestaurantCard data={filteredData} />
-          </div>
-        )}
       </div>
     </>
   );

@@ -2,7 +2,7 @@ import { useEffect } from "react";
 
 import FoodCard from "../components/FoodCard";
 import RestaurantBanner from "../components/RestaurantBanner";
-import { useAppDispatch, useAppSelector } from "../store";
+import { useAppDispatch, useAppSelector } from "../store/hook";
 import { RestaurantServices } from "../services";
 import { selectedRestaurantsByIDData } from "../features/restaurantsSlice";
 import { Food, Restaurant } from "../types/products";
